@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package main;
+
+message RequestMsg {
+  int32 num1 = 1;
+}
+
+message ResponseMsg {
+  int32 numres = 3;
+}
+
+service MyTestService {
+  rpc Function1(RequestMsg) returns (ResponseMsg) {
+  }
+}
