@@ -1,5 +1,6 @@
 Public course material for the ELTE Go language course in 2019.
 
+<<<<<<< HEAD
 ### 2019-02-14
 Introduction, environmental setup: [slides](env-slides.pdf)
 
@@ -32,3 +33,13 @@ Unit testing with [slides](testing-slides.pdf) and exercises.
 
 https://www.amazon.de/Programming-Language-Addison-Wesley-Professional-Computing-ebook/dp/B0184N7WWS
 
+=======
+
+Install go on OS linux 64-bit use the install_go.sh script in the script/ folder
+
+$ chmod +x install_go.sh
+
+$ ./install_go.sh
+
+it will install go version 1.11.4 into your /tmp folder and set all the necessary environment variables
+>>>>>>> 30cf8aa7de6bd7a135f0c9875405a4c14f2a2613
