@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package texts;
+
+message CountRequest {
+  repeated string lines = 1;
+}
+
+message CountResponse {
+  int32 min = 1;
+  int32 max = 2;
+  int32 count = 3;
+}
+
+message WordRequest {
+  string word = 1;
+}
+
+message WordsResponse {
+  repeated string words = 1;
+}
+
+message DefinitionResponse {
+  string definition = 1;
+}
+
+service TextsService {
+  // Count counts lines and calculates minimum/maximum line length.
+  rpc Count(CountRequest) returns (CountResponse) {
+  }
+
+  // Synonym returns synonym words.
+  rpc Synonym(WordRequest) returns (WordsResponse) {
+  }
+
+  // Definition returns the definition of a word.
+  rpc Definition(WordRequest) returns (DefinitionResponse) {
+  }
+}

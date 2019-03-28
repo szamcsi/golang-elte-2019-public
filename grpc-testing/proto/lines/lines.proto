@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package lines;
+
+message CountRequest {
+  repeated string lines = 1;
+}
+
+message CountResponse {
+  int32 min = 1;
+  int32 max = 2;
+  int32 count = 3;
+}
+
+service LinesService {
+  // Count counts lines and calculates minimum/maximum line length.
+  rpc Count(CountRequest) returns (CountResponse) {
+  }
+}
