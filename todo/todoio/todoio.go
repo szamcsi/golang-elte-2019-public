@@ -3,6 +3,7 @@ package todoio
 
 import (
 	"encoding/csv"
+	"fmt"
 	"os"
 	"strconv"
 	"time"
@@ -30,6 +31,9 @@ func Load(path string) ([]*Entry, error) {
 	var output []*Entry
 	// Loop through lines & turn into object
 	for _, line := range lines {
+		if len (line) < 3 {
+			return nil, fmt.Errorf("Malformed error: %g", line)
+		}
 		b, _ := strconv.ParseBool(line[0])
 		now := time.Now()
 		now.Format(line[2])
