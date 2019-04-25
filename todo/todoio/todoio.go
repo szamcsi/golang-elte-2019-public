@@ -32,15 +32,17 @@ func Load(path string) ([]*Entry, error) {
 	// Loop through lines & turn into object
 	for _, line := range lines {
 		if len (line) < 3 {
-			return nil, fmt.Errorf("Malformed error: %g", line)
+			return nil, fmt.Errorf("malformed input error: %s", line)
 		}
-		b, _ := strconv.ParseBool(line[0])
-		now := time.Now()
-		now.Format(line[2])
+		done, err := strconv.ParseBool(line[0])
+		deadline, err := time.Parse("YYYY-MM-DD",line[2])
+		if err != nil {
+			return nil,err
+		}
 		var data = Entry{
-			Done:     b,
+			Done:     done,
 			Text:     line[1],
-			Deadline: now,
+			Deadline: deadline,
 		}
 		output = append(output, &data)
 	}
