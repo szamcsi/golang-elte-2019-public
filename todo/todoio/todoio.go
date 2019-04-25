@@ -30,12 +30,15 @@ func Load(path string) ([]*Entry, error) {
 	}
 	var output []*Entry
 	// Loop through lines & turn into object
-	for _, line := range lines {
+	for idx, line := range lines {
+		if idx == 0 {
+			continue
+		}
 		if len (line) < 3 {
 			return nil, fmt.Errorf("malformed input error: %s", line)
 		}
 		done, err := strconv.ParseBool(line[0])
-		deadline, err := time.Parse("YYYY-MM-DD",line[2])
+		deadline, err := time.Parse("2006-01-02",line[2])
 		if err != nil {
 			return nil,err
 		}

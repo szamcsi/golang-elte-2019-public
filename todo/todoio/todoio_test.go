@@ -1,6 +1,7 @@
 package todoio
 
 import (
+	"os"
 	"reflect"
 	"testing"
 )
@@ -11,7 +12,8 @@ func TestLoad(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	path2 := "../golang-todo2.csv"
+	myTempDir := os.TempDir()
+	path2 := myTempDir + "/golang-todo2.csv"
 	err = Store(path2, got)
 	if err != nil {
 		t.Fatal(err)
