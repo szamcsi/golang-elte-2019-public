@@ -3,7 +3,6 @@ package todoio
 
 import (
 	"encoding/csv"
-	"log"
 	"os"
 	"strconv"
 	"time"
@@ -20,13 +19,13 @@ type Entry struct {
 func Load(path string) ([]*Entry, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		return nil,err
 	}
 	defer file.Close()
 
 	lines, err := csv.NewReader(file).ReadAll()
 	if err != nil {
-		panic(err)
+		return nil,err
 	}
 	var output []*Entry
 	// Loop through lines & turn into object
@@ -49,13 +48,13 @@ func Load(path string) ([]*Entry, error) {
 func Store(path string, entries []*Entry) error {
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	defer file.Close()
 	for _, entry := range entries {
 		n, err := file.WriteString(strconv.FormatBool(entry.Done) + "," + entry.Text + "," + entry.Deadline.Format("2006-01-02") + "\n")
 		if err != nil {
-			panic(err)
+			return err
 		}
 		println(" Line written to file", n)
 	}
