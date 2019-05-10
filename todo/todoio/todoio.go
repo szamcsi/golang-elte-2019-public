@@ -54,9 +54,14 @@ func Store(path string, entries []*Entry) error {
 		return err
 	}
 	defer file.Close()
-	file.WriteString("DONE,TEXT,DEADLINE\n")
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+	var data = [][]string{{"DONE", "TEXT", "DEADLINE"}} // header
 	for _, entry := range entries {
-		_, err := file.WriteString(strconv.FormatBool(entry.Done) + "," + entry.Text + "," + entry.Deadline.Format("2006-01-02") + "\n")
+		data = append(data, []string{strconv.FormatBool(entry.Done), entry.Text, entry.Deadline.Format("2006-01-02")})
+	}
+	for _, value := range data {
+		err := writer.Write(value)
 		if err != nil {
 			return err
 		}
